@@ -1,0 +1,947 @@
+{
+	"info": {
+		"name": "Postman API",
+		"_postman_id": "fbd45ea7-c5b9-847f-12e3-4f950f36fa95",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authenticate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cced399f-d3b6-4ca0-926e-3abf2370f23d",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"AuthorizationToken\", jsonData.Token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic RnVsY3J1bWFkbWluOkVBMV9xYWI="
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/public/v1/authenticate",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"public",
+						"v1",
+						"authenticate"
+					]
+				},
+				"description": "User Authentication for API."
+			},
+			"response": []
+		},
+		{
+			"name": "Pull Content App Module Instance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/public/v1/modules/instances/00000000-0001-0000-0000-000000000001",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"public",
+						"v1",
+						"modules",
+						"instances",
+						"00000000-0001-0000-0000-000000000001"
+					]
+				},
+				"description": "With Authorization tokens the user can pull down all of the content app instances or an indiviaul instance using a parameter. "
+			},
+			"response": []
+		},
+		{
+			"name": "Provider's Admin Screen",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/admin/v1/modules/provider/providers",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"admin",
+						"v1",
+						"modules",
+						"provider",
+						"providers"
+					]
+				},
+				"description": "API Call can pull down the HTML for the Provider Admin List"
+			},
+			"response": []
+		},
+		{
+			"name": "Publish Locations",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/location/publish",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"location",
+						"publish"
+					]
+				},
+				"description": "Publish Locations for the Content Apps Instances. When Adding New Locations through the API, they will not display until the publish call is made. "
+			},
+			"response": []
+		},
+		{
+			"name": "G2 Update Record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c2luZ2xlLWRvYy11cGRhdGVyLWluZmx1ZW5jZWhlYWx0aDpSMWFkYkA2WG43aE8="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"add\":{\"commitWithin\":10000,\"overwrite\":true,\"doc\":{\"custom_s_name\":\"MyService\",\"custom_s_keywords\":\"myservice\",\"custom_ss_locations\":[\"Andalusia Regional Hospital\"],\"id\":\"service_7\",\"custom_s_entityid\":\"7\",\"url\":\"service_7\",\"title\":\"MyService\",\"content\":\",MyService,tester!!,myservice,Andalusia Regional Hospital\",\"metadata_description\":\"<p>tester!!</p>\",\"custom_s_thumbnail_image\":\"\",\"custom_s_thumbnail_image_alt\":\"MyService\",\"custom_dt_g2index_last_updated\":\"2016-09-13T22:39:44.6654794Z\",\"custom_s_content_type\":\"Service\",\"custom_ss_site\":[],\"custom_ss_directlocationids\":[\"501\"],\"custom_ss_directandparentlocationids\":[\"501\",\"2\"],\"language\":\"en\"}},\"commit\":{\"expungeDeletes\":true,\"waitSearcher\":false}}"
+				},
+				"url": {
+					"raw": "https://searchg2.crownpeak.net/ih-crownpeak-dev-single-doc/update",
+					"protocol": "https",
+					"host": [
+						"searchg2",
+						"crownpeak",
+						"net"
+					],
+					"path": [
+						"ih-crownpeak-dev-single-doc",
+						"update"
+					]
+				},
+				"description": "Allows users to update records in the G2 Index. \nNeeds more experimentation"
+			},
+			"response": []
+		},
+		{
+			"name": "Return All Providers",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/provider/providers",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"provider",
+						"providers"
+					]
+				},
+				"description": "Returns all provider data"
+			},
+			"response": []
+		},
+		{
+			"name": "Pull Individual Provider Record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/provider/providers?id=241",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"provider",
+						"providers"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "241",
+							"equals": true
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "10",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "5",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Pull down individual provider records with specific provider ID parameters. "
+			},
+			"response": []
+		},
+		{
+			"name": "Return Provider Record by External ID",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/provider/providers?externald=4",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"provider",
+						"providers"
+					],
+					"query": [
+						{
+							"key": "externald",
+							"value": "4",
+							"equals": true
+						}
+					]
+				},
+				"description": "Return Provider Records by External ID Parameters"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Provider ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Provider>\r\n   <NamePrefix>Dr</NamePrefix>\r\n   <FirstName>Brandon</FirstName>\r\n   <MiddleName>C.</MiddleName>\r\n   <LastName>Easterling</LastName>\r\n   <NameSuffix>Sr.</NameSuffix>\r\n   <Gender>Male</Gender>\r\n   <DateOfBirth>03/29/1987 00:00:00</DateOfBirth>\r\n   <Phone>315-104-6577</Phone>\r\n   <Fax>634-275-1768</Fax>\r\n   <Email>brandon.easterling@mooglemail.com</Email>\r\n   <Website/>\r\n   <PhilosophyOfCare/>\r\n   <AdditionalInformation>Type 1 and 2 diabetes</AdditionalInformation>\r\n   <InPracticeSince>03/25/1984 00:00:00</InPracticeSince>\r\n   <ProviderGroup>None</ProviderGroup>\r\n   <VideoContent>&lt;iframe width=\"420\" height=\"315\" frameborder=\"0\" src=\"http://www.youtube.com/embed/aqImkDgDwHU\">&lt;/iframe></VideoContent>\r\n   <AboutMe/>\r\n   <Specialties>\r\n      <Specialty>\r\n         <SpecialtyName>Allergy/Immunology</SpecialtyName>\r\n         <IsBoardCertified>False</IsBoardCertified>\r\n         <IsPrimary>True</IsPrimary>\r\n         <SpecialtyType>Specialty</SpecialtyType>\r\n      </Specialty>\r\n      <Specialty>\r\n         <SpecialtyName>TEst 1</SpecialtyName>\r\n         <IsBoardCertified>False</IsBoardCertified>\r\n         <IsPrimary>False</IsPrimary>\r\n         <SpecialtyType>Condition</SpecialtyType>\r\n      </Specialty>\r\n   </Specialties>\r\n   <Languages>\r\n      <Language>\r\n         <LanguageName>English</LanguageName>\r\n         <IsPrimary>True</IsPrimary>\r\n         <IsFluent>False</IsFluent>\r\n      </Language>\r\n      <Language>\r\n         <LanguageName>German</LanguageName>\r\n         <IsPrimary>False</IsPrimary>\r\n         <IsFluent>False</IsFluent>\r\n      </Language>\r\n   </Languages>\r\n   <EducationTypes>\r\n      <EducationType>\r\n         <EducationTypeName>Medical Specialty Board Certification</EducationTypeName>\r\n         <InstitutionName>Alabama University</InstitutionName>\r\n         <YearCompleted>1997</YearCompleted>\r\n         <IsComplete>False</IsComplete>\r\n      </EducationType>\r\n   </EducationTypes>\r\n   <ClinicalInterests/>\r\n   <OrgUnits>\r\n      <OrgUnit>\r\n         <OrgUnitId>504</OrgUnitId>\r\n         <Phone>2059821234</Phone>\r\n         <Fax>2059821234</Fax>\r\n         <IsPrimary>True</IsPrimary>\r\n         <IsAcceptingNewPatients>False</IsAcceptingNewPatients>\r\n         <Insurances>\r\n            <Insurance>\r\n               <Name>Allstate</Name>\r\n            </Insurance>\r\n         </Insurances>\r\n         <DisabledInheritedInsurances/>\r\n         <Schedules>\r\n            <Schedule>\r\n               <DayOfWeek>Monday</DayOfWeek>\r\n               <OpenTime>12:00 AM</OpenTime>\r\n               <CloseTime>1:00 AM</CloseTime>\r\n            </Schedule>\r\n         </Schedules>\r\n         <Services>\r\n            <Service>\r\n               <Name>Imaging</Name>\r\n            </Service>\r\n         </Services>\r\n         <ProviderOrgUnitId>245</ProviderOrgUnitId>\r\n      </OrgUnit>\r\n   </OrgUnits>\r\n   <CertificationAgencies/>\r\n   <IsEnabled>True</IsEnabled>\r\n   <OrgUnitAffiliations/>\r\n   <ProviderTypes>\r\n      <ProviderType>\r\n         <Name>Doctor</Name>\r\n      </ProviderType>\r\n      <ProviderType>\r\n         <Name>Professor</Name>\r\n      </ProviderType>\r\n   </ProviderTypes>\r\n   <Keywords>allergy/immunology,imaging,test 1</Keywords>\r\n   <ProviderExternalId>999</ProviderExternalId>\r\n   <DynamicColumns/>\r\n</Provider>"
+				},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/provider/addprovider",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"provider",
+						"addprovider"
+					]
+				},
+				"description": "Add Provider through the API."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Provider Record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Provider xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n    <NamePrefix>Dr</NamePrefix>\r\n    <FirstName>Brandon</FirstName>\r\n    <MiddleName>C.</MiddleName>\r\n    <LastName>Easterling</LastName>\r\n    <NameSuffix>Sr.</NameSuffix>\r\n    <Gender>Male</Gender>\r\n    <DateOfBirth>03/29/1987 00:00:00</DateOfBirth>\r\n    <Phone>315-104-6577</Phone>\r\n    <Fax>634-275-1768</Fax>\r\n    <Email>brandon.easterling@mooglemail.com</Email>\r\n    <Website />\r\n    <PhilosophyOfCare />\r\n    <AdditionalInformation>Type 1 and 2 diabetes</AdditionalInformation>\r\n    <InPracticeSince>03/25/1984 00:00:00</InPracticeSince>\r\n    <ProviderGroup>None</ProviderGroup>\r\n    <VideoContent>&lt;iframe width=\"420\" height=\"315\" frameborder=\"0\" src=\"http://www.youtube.com/embed/aqImkDgDwHU\"&gt;&lt;/iframe&gt;</VideoContent>\r\n    <AboutMe />\r\n    <Specialties>\r\n        <Specialty>\r\n            <SpecialtyName>Allergy/Immunology</SpecialtyName>\r\n            <IsBoardCertified>False</IsBoardCertified>\r\n            <IsPrimary>True</IsPrimary>\r\n            <SpecialtyType>Specialty</SpecialtyType>\r\n        </Specialty>\r\n        <Specialty>\r\n            <SpecialtyName>TEst 1</SpecialtyName>\r\n            <IsBoardCertified>False</IsBoardCertified>\r\n            <IsPrimary>False</IsPrimary>\r\n            <SpecialtyType>Condition</SpecialtyType>\r\n        </Specialty>\r\n    </Specialties>\r\n    <Languages>\r\n        <Language>\r\n            <LanguageName>English</LanguageName>\r\n            <IsPrimary>True</IsPrimary>\r\n            <IsFluent>False</IsFluent>\r\n        </Language>\r\n        <Language>\r\n            <LanguageName>German</LanguageName>\r\n            <IsPrimary>False</IsPrimary>\r\n            <IsFluent>False</IsFluent>\r\n        </Language>\r\n        <Language>\r\n            <LanguageName>Latin</LanguageName>\r\n            <IsPrimary>False</IsPrimary>\r\n            <IsFluent>False</IsFluent>\r\n        </Language>\r\n    </Languages>\r\n    <EducationTypes>\r\n        <EducationType>\r\n            <EducationTypeName>Medical Specialty Board Certification</EducationTypeName>\r\n            <InstitutionName>Alabama University</InstitutionName>\r\n            <YearCompleted>1997</YearCompleted>\r\n            <IsComplete>True</IsComplete>\r\n        </EducationType>\r\n    </EducationTypes>\r\n    <ClinicalInterests />\r\n    <OrgUnits>\r\n        <OrgUnit>\r\n            <OrgUnitId>504</OrgUnitId>\r\n            <Phone>2059821234</Phone>\r\n            <Fax>2059821234</Fax>\r\n            <IsPrimary>True</IsPrimary>\r\n            <IsAcceptingNewPatients>False</IsAcceptingNewPatients>\r\n            <Insurances>\r\n                <Insurance>\r\n                    <Name>Allstate</Name>\r\n                </Insurance>\r\n            </Insurances>\r\n            <DisabledInheritedInsurances />\r\n            <Schedules>\r\n                <Schedule>\r\n                    <DayOfWeek>Monday</DayOfWeek>\r\n                    <OpenTime>12:00 AM</OpenTime>\r\n                    <CloseTime>1:00 AM</CloseTime>\r\n                </Schedule>\r\n            </Schedules>\r\n            <Services>\r\n                <Service>\r\n                    <Name>Imaging</Name>\r\n                </Service>\r\n            </Services>\r\n            <ProviderOrgUnitId>3171</ProviderOrgUnitId>\r\n        </OrgUnit>\r\n    </OrgUnits>\r\n    <CertificationAgencies />\r\n    <IsEnabled>True</IsEnabled>\r\n    <ProviderExternalId>999</ProviderExternalId>\r\n    <OrgUnitAffiliations />\r\n    <ProviderTypes>\r\n        <ProviderType>\r\n            <Name>Doctor</Name>\r\n        </ProviderType>\r\n        <ProviderType>\r\n            <Name>Professor</Name>\r\n        </ProviderType>\r\n    </ProviderTypes>\r\n    <Keywords>allergy/immunology,imaging,test 1</Keywords>\r\n    <AdditionalSuffix />\r\n    <ProviderId>2114</ProviderId>\r\n    <DynamicColumns />\r\n</Provider>"
+				},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/provider/updateprovider",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"provider",
+						"updateprovider"
+					]
+				},
+				"description": "Update Provider Record with JSON"
+			},
+			"response": []
+		},
+		{
+			"name": "Return All Event Records",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/event/events",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"events"
+					]
+				},
+				"description": "Returns All Event Records"
+			},
+			"response": []
+		},
+		{
+			"name": "Return Individual Event Records",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/event/events?id=1",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"events"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1",
+							"equals": true
+						}
+					]
+				},
+				"description": "Return Individual Event Records by ID (parameter)"
+			},
+			"response": []
+		},
+		{
+			"name": "Return Event Record by External ID",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/event/events?externalId=99900",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"events"
+					],
+					"query": [
+						{
+							"key": "externalId",
+							"value": "99900",
+							"equals": true
+						}
+					]
+				},
+				"description": "Return Event Record by External ID (parameter)"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Event Records Through the API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Event>\r\n\t<Title>API Event Test 12</Title>\r\n\t <DirectUrl>API-Event-Test12</DirectUrl>\r\n\t <SummaryDescription>API Testing for Adding Events</SummaryDescription>\r\n\t <EventTopics>\r\n\t    <EventTopic>\r\n\t       <Name>Bone Health</Name>\r\n\t    </EventTopic>\r\n\t </EventTopics>\r\n\t <EventTypes>\r\n\t    <EventType>\r\n\t       <Name>Class</Name>\r\n\t    </EventType>\r\n\t </EventTypes>\r\n\t <EventContent>Bruhhhhh we added some content here. Please read dis. </EventContent>\r\n\t <PublishDate>04/20/2016 11:02:29</PublishDate>\r\n\t <UnpublishDate>11/06/2016 11:02:29</UnpublishDate>\r\n\t <Cost>0.0000</Cost>\r\n\t <IsEnabled>True</IsEnabled>\r\n\t <InternalOnly>False</InternalOnly>\r\n\t <PublicOnly>False</PublicOnly>\r\n\t <IsNotifyContactEnabled>True</IsNotifyContactEnabled>\r\n\t <NotificationFrequency>Immediately</NotificationFrequency>\r\n\t <IsRegistrationEnabled>True</IsRegistrationEnabled>\r\n\t <IsNotificationListEnabled>True</IsNotificationListEnabled>\r\n\t <DiscountCodes/>\r\n\t <DynamicColumns/>\r\n\t <EventId>999</EventId>\r\n\t <EventExternalId>99900</EventExternalId>\r\n\t <AllowPayOnSite>False</AllowPayOnSite>\r\n   </Event>\r\n"
+				},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/event/addevent",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"addevent"
+					]
+				},
+				"description": "Add Event Records Through API"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Event Record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Event>\r\n\t<Title>API Event Test</Title>\r\n\t <DirectUrl>Ryu-API-Event-Test</DirectUrl>\r\n\t <SummaryDescription>RYU API Testing for Adding Events</SummaryDescription>\r\n\t <EventTopics>\r\n\t    <EventTopic>\r\n\t       <Name>Bone Health</Name>\r\n\t    </EventTopic>\r\n\t </EventTopics>\r\n\t <EventTypes>\r\n\t    <EventType>\r\n\t       <Name>Class</Name>\r\n\t    </EventType>\r\n\t </EventTypes>\r\n\t <EventContent>Bruhhhhh we added some content here. Please read dis. </EventContent>\r\n\t <PublishDate>04/20/2016 11:02:29</PublishDate>\r\n\t <UnpublishDate>11/06/2016 11:02:29</UnpublishDate>\r\n\t <Cost>0.0000</Cost>\r\n\t <IsEnabled>True</IsEnabled>\r\n\t <InternalOnly>False</InternalOnly>\r\n\t <PublicOnly>False</PublicOnly>\r\n\t <IsNotifyContactEnabled>True</IsNotifyContactEnabled>\r\n\t <NotificationFrequency>Immediately</NotificationFrequency>\r\n\t <IsRegistrationEnabled>True</IsRegistrationEnabled>\r\n\t <IsNotificationListEnabled>True</IsNotificationListEnabled>\r\n\t <DiscountCodes/>\r\n\t <DynamicColumns/>\r\n\t <EventId>211</EventId>\r\n\t <AllowPayOnSite>False</AllowPayOnSite>\r\n   </Event>\r\n"
+				},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/event/updateevent",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"updateevent"
+					]
+				},
+				"description": "Update Event Record"
+			},
+			"response": []
+		},
+		{
+			"name": "GetOccurrenceById",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/event/occurrence?id=4",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"occurrence"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "4",
+							"equals": true
+						}
+					]
+				},
+				"description": "Return Event Occurrences By Id"
+			},
+			"response": []
+		},
+		{
+			"name": "GetOccurrenceByExternalId",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "bd3bce8d-36af-4650-85bb-7b12721174c2"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://csdev01.influencehealth.com/CS/api/admin/v1/api/event/occurrence?externalId=4",
+					"protocol": "https",
+					"host": [
+						"csdev01",
+						"influencehealth",
+						"com"
+					],
+					"path": [
+						"CS",
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"occurrence"
+					],
+					"query": [
+						{
+							"key": "externalId",
+							"value": "4",
+							"equals": true
+						}
+					]
+				},
+				"description": "Return Event Occurrences by External Id"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Event Occurrence",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " <EventOccurrence>\r\n <EventId>1</EventId>\r\n   <IsEnabled>True</IsEnabled>\r\n   <OrgUnitId>501</OrgUnitId>\r\n   <ContactName>Samuel L. Jackson</ContactName>\r\n   <ContactEmail>Steven.West@influencehealth.com</ContactEmail>\r\n   <ContactPhone>2054184758</ContactPhone>\r\n   <MaximumAttendees>30</MaximumAttendees>\r\n   <Presenter>Peter Jackson</Presenter>\r\n   <Cost>25.00</Cost>\r\n   <RegistrationStartDate>08/03/2017 11:02:29</RegistrationStartDate>\r\n   <RegistrationEndDate>08/18/2019 11:02:29</RegistrationEndDate>\r\n   <IsPriceScheduleEnabled>False</IsPriceScheduleEnabled>\r\n   <IsRegistrationEnabled>True</IsRegistrationEnabled>\r\n   <IsNotificationListEnabled>True</IsNotificationListEnabled>\r\n   <IsNotifyContactEnabled>True</IsNotifyContactEnabled>\r\n   <AllowPayOnSite>False</AllowPayOnSite>\r\n   <EventOccurrenceDates>\r\n      <EventOccurrenceDate>\r\n         <StartDate>08/03/2017 11:02:29</StartDate>\r\n         <EndDate>07/18/2019 12:02:29</EndDate>\r\n      </EventOccurrenceDate>\r\n   </EventOccurrenceDates>\r\n</EventOccurrence>"
+				},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/event/addeventoccurrence",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"addeventoccurrence"
+					]
+				},
+				"description": "Add Event Occurrence to an Event via the API"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Event Occurrences",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml"
+					},
+					{
+						"key": "AuthorizationToken",
+						"value": "bd3bce8d-36af-4650-85bb-7b12721174c2"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<EventOccurrence xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n    <EventId>1</EventId>\n    <IsEnabled>False</IsEnabled>\n    <OrgUnitId>501</OrgUnitId>\n    <State />\n    <Country />\n    <ContactName>Heather Peters</ContactName>\n    <ContactEmail>heather.peters@medseek.com</ContactEmail>\n    <ContactPhone>2054184758</ContactPhone>\n    <MaximumAttendees>30</MaximumAttendees>\n    <Presenter>Heather Peters</Presenter>\n    <Cost>100.0000</Cost>\n    <CostCenter />\n    <RegistrationStartDate>08/03/2017 02:49:09</RegistrationStartDate>\n    <RegistrationEndDate>11/23/2020 11:49:09</RegistrationEndDate>\n    <IsPriceScheduleEnabled>False</IsPriceScheduleEnabled>\n    <IsRegistrationEnabled>True</IsRegistrationEnabled>\n    <IsNotificationListEnabled>False</IsNotificationListEnabled>\n    <IsNotifyContactEnabled>True</IsNotifyContactEnabled>\n    <SpecialInstructions />\n    <AllowPayOnSite>True</AllowPayOnSite>\n    <EventOccurrenceDates>\n        <EventOccurrenceDate>\n            <StartDate>08/03/2017 08:00:00</StartDate>\n            <EndDate>07/27/2020 17:00:00</EndDate>\n        </EventOccurrenceDate>\n    </EventOccurrenceDates>\n    <OccurrenceId>321</OccurrenceId>\n</EventOccurrence>"
+				},
+				"url": {
+					"raw": "https://csdev01.influencehealth.com/CS/api/public/v1/api/admin/v1/api/event/updateeventoccurrence",
+					"protocol": "https",
+					"host": [
+						"csdev01",
+						"influencehealth",
+						"com"
+					],
+					"path": [
+						"CS",
+						"api",
+						"public",
+						"v1",
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"updateeventoccurrence"
+					]
+				},
+				"description": "Update Event Occurrences via the API"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Occurrence Registrants via Start Date",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "bd3bce8d-36af-4650-85bb-7b12721174c2"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://csdev01.influencehealth.com/CS/api/admin/v1/api/event/getoccurrenceregistrants?startDate=08-03-2017",
+					"protocol": "https",
+					"host": [
+						"csdev01",
+						"influencehealth",
+						"com"
+					],
+					"path": [
+						"CS",
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"getoccurrenceregistrants"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "08-03-2017",
+							"equals": true
+						}
+					]
+				},
+				"description": "Update Occurrence Registrants via Start Date"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Registrants By OccurrenceId",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "bd3bce8d-36af-4650-85bb-7b12721174c2"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://csdev01.influencehealth.com/CS/api/admin/v1/api/event/getoccurrenceregistrants?id=321",
+					"protocol": "https",
+					"host": [
+						"csdev01",
+						"influencehealth",
+						"com"
+					],
+					"path": [
+						"CS",
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"getoccurrenceregistrants"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "321",
+							"equals": true
+						}
+					]
+				},
+				"description": "get Registrants By OccurrenceId"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Registrants By ExternalOccurrenceId",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "bd3bce8d-36af-4650-85bb-7b12721174c2"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://csdev01.influencehealth.com/CS/api/admin/v1/api/event/getoccurrenceregistrants?externalId=2",
+					"protocol": "https",
+					"host": [
+						"csdev01",
+						"influencehealth",
+						"com"
+					],
+					"path": [
+						"CS",
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"event",
+						"getoccurrenceregistrants"
+					],
+					"query": [
+						{
+							"key": "externalId",
+							"value": "2",
+							"equals": true
+						}
+					]
+				},
+				"description": "Get Registrants By ExternalOccurrenceId"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Location",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<OrgUnit>\r\n    <Name>API Pizza</Name>\r\n   <IsEnabled>True</IsEnabled>\r\n   <Address1/>\r\n   <Address2/>\r\n   <City/>\r\n   <State>Georgia</State>\r\n   <PostalCode/>\r\n   <Country>United States</Country>\r\n   <Phone/>\r\n   <Fax/>\r\n   <CustomUrl>https://csqa01.influencehealth.com/Phoenix/locations/api-pizza.aspx</CustomUrl>\r\n   <OrgUnitTypes>\r\n      <OrgUnitType>\r\n         <Name>Site</Name>\r\n         <IsPrimaryOrgUnitType>false</IsPrimaryOrgUnitType>\r\n      </OrgUnitType>\r\n   </OrgUnitTypes>\r\n   <OrgUnitInsurances/>\r\n   <OrgUnitServices/>\r\n   <OrgUnitHours/>\r\n   <OrgUnitDiscountCodes/>\r\n   <OrgUnitInternalId>999</OrgUnitInternalId>\r\n   <DynamicColumns/>\r\n   <IsPotentialEventLocation>True</IsPotentialEventLocation>\r\n   <ExternalId>147258</ExternalId>\r\n</OrgUnit>"
+				},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/location/addlocation",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"location",
+						"addlocation"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Location",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<OrgUnit>\r\n    <Name>API Pizza</Name>\r\n   <IsEnabled>True</IsEnabled>\r\n  <Address1/>\r\n   <Address2/>\r\n   <City/>\r\n   <State>AL</State>\r\n   <PostalCode/>\r\n   <Country>United States</Country>\r\n   <Phone/>\r\n   <Fax/>\r\n   <CustomUrl>https://csdev01.influencehealth.com/locations/api-pizza.aspx</CustomUrl>\r\n   <OrgUnitTypes>\r\n      <OrgUnitType>\r\n         <Name>Site</Name>\r\n         <IsPrimaryOrgUnitType>false</IsPrimaryOrgUnitType>\r\n      </OrgUnitType>\r\n   </OrgUnitTypes>\r\n   <OrgUnitInsurances/>\r\n   <OrgUnitServices/>\r\n   <OrgUnitHours/>\r\n   <OrgUnitDiscountCodes/>\r\n   <OrgUnitInternalId>609</OrgUnitInternalId>\r\n   <DynamicColumns/>\r\n   <IsPotentialEventLocation>True</IsPotentialEventLocation>\r\n   <OrgUnitExternalId>147258</OrgUnitExternalId>\r\n</OrgUnit>"
+				},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/location/updatelocation",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"location",
+						"updatelocation"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Location Types",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/location/types",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"location",
+						"types"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Location Type By Id",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AuthorizationToken",
+						"value": "{{AuthorizationToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{QA domain}}/api/admin/v1/api/location/types?id=6",
+					"host": [
+						"{{QA domain}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"v1",
+						"api",
+						"location",
+						"types"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
