@@ -8,8 +8,8 @@ describe('log in to Crownpeak', function() {
     var height = 1200;
     browser.driver.manage().window().setSize(width, height);
     //browser.manage().window().maximize();
-functions.keysWait(by.name,'userName','PhoenixAdmin');
-functions.keysWait(by.name,'password','MQnJnM~9nS@a');
+functions.keysWait(by.name,'userName','User');
+functions.keysWait(by.name,'password','Password');
 functions.clickWait(by.id,'loginButton');
 
 //provider verification

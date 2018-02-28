@@ -40,7 +40,7 @@ exports.config = {
                            jasmine.getEnv().addReporter(new webRep.WebReporter({
                              projectName:'Event Content Apps',
                              environment : 'Phoenix-QA'+ " " + capabilities.browserName,
-                             slackUrl : 'https://hooks.slack.com/services/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',
+                             slackUrl : 'slackWebHookHere',
                              channel : '#automation-codx'
                            }));
                        });
